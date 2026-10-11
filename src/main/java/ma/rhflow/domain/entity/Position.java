@@ -1,0 +1,44 @@
+package ma.rhflow.domain.entity;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import org.hibernate.annotations.Filter;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import ma.rhflow.tenant.TenantScoped;
+
+@Entity
+@Table(name = "positions")
+@Getter
+@Setter
+@Filter(name = TenantScoped.FILTER_NAME, condition = "tenant_id = :" + TenantScoped.PARAM_NAME)
+public class Position extends TenantScoped {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private Long departmentId;
+    @Column(length = 2000)
+    private String description;
+    @Column(length = 2000)
+    private String missions;
+    @Column(length = 2000)
+    private String skills;
+    private BigDecimal minSalary;
+    private BigDecimal maxSalary;
+
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt = Instant.now();
+    @Column(nullable = false)
+    private Instant updatedAt = Instant.now();
+    @PreUpdate
+    void onUpdate() {
+        updatedAt = Instant.now();
+    }
+}

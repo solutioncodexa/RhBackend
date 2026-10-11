@@ -1,0 +1,11 @@
+package ma.rhflow.domain.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import java.util.Optional;
+
+import ma.rhflow.domain.entity.AssistantPendingAction;
+
+public interface AssistantPendingActionRepository extends JpaRepository<AssistantPendingAction, Long>, JpaSpecificationExecutor<AssistantPendingAction> {
+    Optional<AssistantPendingAction> findByActionId(String actionId);
+}

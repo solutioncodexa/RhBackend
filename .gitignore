@@ -1,0 +1,12 @@
+target/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+data/
+*.log
+.mvn/wrapper/maven-wrapper.jar
+.env
+application-local.properties
+application-dev.properties
